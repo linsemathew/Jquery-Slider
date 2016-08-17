@@ -6,7 +6,13 @@ $(document).ready(function(){
 	$('.slide').first().addClass('active');
 	$('.slide').hide();
 	$('.active').show();
-	$('#next').on('click', function(){
+	$('#next').on('click', nextSlide)
+	$('#prev').on('click', prevSlide)
+	if (autoswitch == true) {
+		setInterval(nextSlide, autoswitchspeed);
+	}
+
+	function nextSlide(){
 		$('.active').removeClass('active').addClass('oldActive');
 		if($('.oldActive').is(':last-child')){
 			$('.slide').first().addClass('active');
@@ -16,8 +22,9 @@ $(document).ready(function(){
 		$('.oldActive').removeClass('oldActive');
 		$('.slide').fadeOut(speed);
 		$('.active').fadeIn(speed);
-	})
-	$('#prev').on('click', function(){
+	}
+
+	function prevSlide(){
 		$('.active').removeClass('active').addClass('oldActive');
 		if($('.oldActive').is(':first-child')){
 			$('.slide').last().addClass('active');
@@ -27,5 +34,5 @@ $(document).ready(function(){
 		$('.oldActive').removeClass('oldActive');
 		$('.slide').fadeOut(speed);
 		$('.active').fadeIn(speed);
-	})
+	}
 })
